@@ -1,0 +1,12 @@
+Query for Array of objects:
+query {  
+  products{
+    name,
+    description,
+    quantity
+    price,
+    image
+    onSale
+    categoryId    
+  }  
+}

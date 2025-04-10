@@ -102,9 +102,11 @@ const typeDefs = gql`
     price: Float
     isCool: Boolean
     products: [Product!]!
+    product(id: ID!): Product
   }
 
   type Product {
+    id: ID!
     name: String
     description: String
     quantity: Int
@@ -132,6 +134,14 @@ const resolvers = {
     },
     products: () => {
       return products;
+    },
+    product: (parent, orgs, context) => {
+      const productId = orgs.id;
+      const product = products.find((product) => product.id === productId);
+      if (!product) {
+        return null;
+      }
+      return product;
     },
   },
 };
