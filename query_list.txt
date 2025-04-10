@@ -44,3 +44,14 @@ variables:
 {
   "categoryId": "c01b1ff4-f894-4ef2-b27a-22aacc2fca70"
 }
+
+Query for Category filter with associated products:
+query($categoryId: ID!){
+  category(id: $categoryId) {
+    id
+    name
+    products {
+      name
+    }
+  }
+}
