@@ -1,14 +1,20 @@
-const Category = {
-  products: (parent, orgs, { db }) => {
-    const categoryId = parent.id;
-    const product = db.products.filter(
+exports.Category = {
+  products: ({ id: categoryId }, { filter }, { db }) => {
+    const categoryProducts = db.products.filter(
       (product) => product.categoryId === categoryId
     );
-    if (!product) {
-      return null;
+    let filteredCategoryProducts = categoryProducts;
+
+    if (filter) {
+      if (filter.onSale === true) {
+        filteredCategoryProducts = filteredCategoryProducts.filter(
+          (product) => {
+            return product.onSale;
+          }
+        );
+      }
     }
-    return product;
+
+    return filteredCategoryProducts;
   },
 };
-
-module.exports = { Category };

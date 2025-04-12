@@ -92,3 +92,30 @@ query{
     }
   }
 }
+
+Query for products with onSale filtering:
+query {  
+  products(filter :{
+    onSale:true
+  }){
+    name,
+    description,
+    quantity
+    price,
+    image
+    onSale  
+  }  
+}
+
+Query for category with products filter:
+query($categoryId: ID!){
+  category(id: $categoryId) {
+    id
+    name
+    products (filter:{
+      onSale:true
+    }){
+      name
+    }
+  }
+}
