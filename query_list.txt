@@ -1,0 +1,74 @@
+Query for Array of objects:
+query {  
+  products{
+    name,
+    description,
+    quantity
+    price,
+    image
+    onSale
+    categoryId    
+  }  
+}
+
+Query for product filtering by id:
+query{
+  product(id:"a4824a31-5c83-42af-8c1b-6e2461aae1ef"){
+    id,
+    name,
+    description,
+    quantity
+    price,
+    image
+    onSale
+    categoryId 
+  }
+}
+
+Query for categories:
+query{
+  categories{
+    id
+    name
+  }
+}
+
+Query for product filtering by id:
+query($categoryId: ID!){
+  category(id: $categoryId) {
+    id
+    name
+  }
+}
+variables:
+{
+  "categoryId": "c01b1ff4-f894-4ef2-b27a-22aacc2fca70"
+}
+
+Query for Category filter with associated products:
+query($categoryId: ID!){
+  category(id: $categoryId) {
+    id
+    name
+    products {
+      name
+    }
+  }
+}
+
+Query for product filter with its category:
+query{
+  product(id:"a4824a31-5c83-42af-8c1b-6e2461aae1ef"){
+    id,
+    name,
+    description,
+    quantity
+    price,
+    image
+    onSale
+    category{
+      id
+      name
+    }
+  }
+}

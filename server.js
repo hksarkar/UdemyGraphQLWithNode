@@ -94,6 +94,21 @@ const products = [
   },
 ];
 
+const categories = [
+  {
+    id: "c01b1ff4-f894-4ef2-b27a-22aacc2fca70",
+    name: "Kitchen",
+  },
+  {
+    id: "34115aac-0ff5-4859-8f43-10e8db23602b",
+    name: "Garden",
+  },
+  {
+    id: "d914aec0-25b2-4103-9ed8-225d39018d1d",
+    name: "Sports",
+  },
+];
+
 // The GraphQL schema
 const typeDefs = gql`
   type Query {
@@ -102,16 +117,26 @@ const typeDefs = gql`
     price: Float
     isCool: Boolean
     products: [Product!]!
+    product(id: ID!): Product
+    categories: [Category!]
+    category(id: ID!): Category
   }
 
   type Product {
+    id: ID!
     name: String
     description: String
     quantity: Int
     price: Float
     image: String
     onSale: Boolean
-    categoryId: String
+    category: Category
+  }
+
+  type Category {
+    id: ID!
+    name: String
+    products: [Product!]
   }
 `;
 
@@ -132,6 +157,39 @@ const resolvers = {
     },
     products: () => {
       return products;
+    },
+    product: (parent, orgs, context) => {
+      const productId = orgs.id;
+      const product = products.find((product) => product.id === productId);
+      if (!product) {
+        return null;
+      }
+      return product;
+    },
+    categories: () => {
+      return categories;
+    },
+    category: (parent, orgs, context) => {
+      const { id } = orgs;
+      return categories.find((category) => category.id === id);
+    },
+  },
+  Category: {
+    products: (parent, orgs, context) => {
+      const categoryId = parent.id;
+      const product = products.filter(
+        (product) => product.categoryId === categoryId
+      );
+      if (!product) {
+        return null;
+      }
+      return product;
+    },
+  },
+  Product: {
+    category: (parent, orgs, context) => {
+      const { categoryId } = parent;
+      return categories.find((category) => category.id === categoryId);
     },
   },
 };
