@@ -21,6 +21,7 @@ const typeDefs = gql`
     price: Float
     image: String
     onSale: Boolean
+    rating: Int
     category: Category
     reviews: [Review!]
   }
