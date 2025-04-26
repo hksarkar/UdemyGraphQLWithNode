@@ -1,0 +1,9 @@
+Mutations for add category
+mutation {
+  addCategory(input:{
+    name:"Office"
+  }) {
+    id,
+    name
+  }
+}
