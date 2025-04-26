@@ -1,7 +1,7 @@
 const { ApolloServer } = require("apollo-server");
 const { typeDefs } = require("./schema.js");
 const { Query } = require("./resolvers/Query");
-//const { Mutation } = require("./resolvers/Mutation");
+const { Mutation } = require("./resolvers/Mutation");
 const { Category } = require("./resolvers/Category");
 const { Product } = require("./resolvers/Product");
 const { db } = require("./db.js");
@@ -10,7 +10,7 @@ const { db } = require("./db.js");
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: Query,
-
+  Mutation: Mutation,
   Category: Category,
   Product: Product,
 };

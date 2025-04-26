@@ -20,7 +20,7 @@ const Query = {
           return product.onSale;
         });
       }
-      /*if ([1, 2, 3, 4, 5].includes(avgRating)) {
+      if ([1, 2, 3, 4, 5].includes(avgRating)) {
         filteredProducts = filteredProducts.filter((product) => {
           let sumRating = 0;
           let numberOfReviews = 0;
@@ -34,7 +34,7 @@ const Query = {
 
           return avgProductRating >= avgRating;
         });
-      }*/
+      }
     }
 
     return filteredProducts;
